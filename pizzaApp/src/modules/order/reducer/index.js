@@ -4,7 +4,7 @@ import { ORDER_ACTIONS } from "../actions/consts";
 const initialState = {
     data: [],
     error: null,
-    status: ASYNC_STATUS.IDLE
+    status: ASYNC_STATUS.IDLE,
 };
 
 export function attendanceReducer(state = initialState, action) {
@@ -28,7 +28,7 @@ export function attendanceReducer(state = initialState, action) {
                 ...state,
                 status: ASYNC_STATUS.ERROR,
                 data: [],
-                error: action.error
+                error: action.error,
             };
         case `${ORDER_ACTIONS.ADD_ORDER}`:
             return {
@@ -37,22 +37,17 @@ export function attendanceReducer(state = initialState, action) {
                 error: null,
             };
         case `${ORDER_ACTIONS.ADD_ORDER}_SUCCESS`:
-        
             return {
                 ...state,
                 status: ASYNC_STATUS.SUCCESS,
-                data: [
-                    ...state.data,
-                    action.payload
-                ],
+                data: [...state.data, action.payload],
                 error: null,
-                
             };
         case `${ORDER_ACTIONS.ADD_ORDER}_ERROR`:
             return {
                 ...state,
                 status: ASYNC_STATUS.ERROR,
-                error: action.error
+                error: action.error,
             };
         case `${ORDER_ACTIONS.UPDATE_ORDER}`:
             return {
@@ -64,15 +59,14 @@ export function attendanceReducer(state = initialState, action) {
             return {
                 ...state,
                 status: ASYNC_STATUS.SUCCESS,
-                data: state.data.map(order => {
-                  
+                data: state.data.map((order) => {
                     if (order.id === action.payload.id) {
-                        console.log("salam")
+                        console.log("salam");
                         return {
-                            ...action.payload
-                        }
+                            ...action.payload,
+                        };
                     }
-                    return order
+                    return order;
                 }),
                 error: null,
             };
@@ -80,7 +74,7 @@ export function attendanceReducer(state = initialState, action) {
             return {
                 ...state,
                 status: ASYNC_STATUS.ERROR,
-                error: action.error
+                error: action.error,
             };
         default:
             break;

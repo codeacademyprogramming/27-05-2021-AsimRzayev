@@ -11,9 +11,7 @@ import {
     Box,
 } from "@material-ui/core";
 import {
-
     FormControl,
-
     Input,
     Select,
     MenuItem,
@@ -23,7 +21,7 @@ import {
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {   updateOrder } from "../actions";
+import { updateOrder } from "../actions";
 const initialStatus = {
     CREATED: "CREATED",
     IN_PROGRESS: "IN_PROGRESS",
@@ -48,26 +46,37 @@ function StudentAttendanceForm({ open, onClose, EditItem }) {
     const handlePizzaStatusChange = React.useCallback((event) => {
         setpizzaStatus(event.target.value);
     }, []);
-  
 
     const dispatch = useDispatch();
 
     const handleSave = React.useCallback(() => {
-       
         const updatePayload = {
-            id:EditItem.id,
-            pizzaName:pizzaname!==""?pizzaname:EditItem.pizzaName,
-            pizzaCount:pizzaCount!==""?pizzaCount:EditItem.pizzaCount,
-            pizzaAddition:pizzaAddition!==""?pizzaAddition:EditItem.pizzaAddition,
-            status:pizzaStatus!==""?pizzaStatus:EditItem.status
-        }
+            id: EditItem.id,
+            pizzaName: pizzaname !== "" ? pizzaname : EditItem.pizzaName,
+            pizzaCount: pizzaCount !== "" ? pizzaCount : EditItem.pizzaCount,
+            pizzaAddition:
+                pizzaAddition !== "" ? pizzaAddition : EditItem.pizzaAddition,
+            status: pizzaStatus !== "" ? pizzaStatus : EditItem.status,
+        };
         const dispatchUpdateOrder = updateOrder(dispatch);
         dispatchUpdateOrder(updatePayload);
         onClose();
-    },[dispatch,pizzaname,pizzaCount,pizzaAddition,pizzaStatus,EditItem.pizzaCount,EditItem.pizzaName,EditItem.status,EditItem.pizzaAddition,EditItem.id,onClose])
- 
+    }, [
+        dispatch,
+        pizzaname,
+        pizzaCount,
+        pizzaAddition,
+        pizzaStatus,
+        EditItem.pizzaCount,
+        EditItem.pizzaName,
+        EditItem.status,
+        EditItem.pizzaAddition,
+        EditItem.id,
+        onClose,
+    ]);
+
     return (
-        <Dialog open={open} onClose={onClose}  maxWidth={'md'}>
+        <Dialog open={open} onClose={onClose} maxWidth={"md"}>
             <DialogTitle>Order Edit Form</DialogTitle>
             <DialogContent>
                 <Table>
@@ -145,24 +154,25 @@ function StudentAttendanceForm({ open, onClose, EditItem }) {
                                     />
                                 </TableCell>
                                 <TableCell>
-                            
                                     <Select
                                         labelId="demo-mutiple-name-label"
                                         id="demo-mutiple-name"
                                         value={
-                                            pizzaStatus ===""
+                                            pizzaStatus === ""
                                                 ? EditItem.status
                                                 : pizzaStatus
                                         }
                                         onChange={handlePizzaStatusChange}
                                         input={<Input />}
                                     >
-                                        {Object.keys(initialStatus).map(( key ) => (
-                                            <MenuItem key={key} value={key}>
-                                                {key}
-                                            </MenuItem>
-                                        ))}
-                                         </Select>
+                                        {Object.keys(initialStatus).map(
+                                            (key) => (
+                                                <MenuItem key={key} value={key}>
+                                                    {key}
+                                                </MenuItem>
+                                            )
+                                        )}
+                                    </Select>
                                 </TableCell>
                             </TableRow>
                         }

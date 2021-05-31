@@ -9,20 +9,12 @@ class OrderService extends HttpClient {
         return this.get("attendence");
     }
 
- 
-
     addOrder(data) {
-        return this.post(
-            'https://httpbin.org/post',
-            data
-        )
+        return this.post("https://httpbin.org/post", data);
     }
 
     updateOrder(data) {
-        return this.post(
-            'https://httpbin.org/post',
-            data
-        )
+        return this.post("https://httpbin.org/post", data);
     }
 }
 

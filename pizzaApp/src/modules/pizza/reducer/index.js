@@ -4,7 +4,7 @@ import { PIZZA_ACTIONS } from "../actions/consts";
 const initialState = {
     data: [],
     error: null,
-    status: ASYNC_STATUS.IDLE
+    status: ASYNC_STATUS.IDLE,
 };
 
 export function pizzaReducer(state = initialState, action) {
@@ -17,8 +17,7 @@ export function pizzaReducer(state = initialState, action) {
                 error: null,
             };
         case `${PIZZA_ACTIONS.GET_PIZZAS}_SUCCESS`:
-        return {
-                
+            return {
                 ...state,
                 status: ASYNC_STATUS.SUCCESS,
                 data: action.payload,
@@ -29,7 +28,7 @@ export function pizzaReducer(state = initialState, action) {
                 ...state,
                 status: ASYNC_STATUS.ERROR,
                 data: [],
-                error: action.error
+                error: action.error,
             };
         default:
             break;
